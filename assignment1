@@ -209,7 +209,48 @@ Pizza:
     
     
 4. Design a code sharing platform (eg: Github).
- 4.1
+
+1.
+   user:
+          data:username,password
+          behavior:enterInThePlatform
+   observer：
+          data:username,password
+          behavior:seachCode
+   repository:
+          data:
+          behavior:saveUserName,renewUsername
+   userdata:
+          data:name,code
+          behavior:
+   platform:
+   Data: user，observer,repository,userdata
+   Behavoirs: save,renew,display
+           
+                  if  user.create(repository)
+                      platform.save(userdata)
+            end
+            save = (userdata) {
+            put userdata into database
+            }
+                  if  user.push(code)
+                      platform.renew(repository)
+            end
+            push = (code){
+            put the code to database
+            }
+            renew = (repository){
+            update code in repository
+            }
+                  if . obsever.searchCode(user)
+                      platform.display(code)
+            end
+            display = (code){
+            display the code into the screen
+            }
+                 
+    }
+                 
  
  
  
