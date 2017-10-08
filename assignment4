@@ -1,0 +1,182 @@
+package assignment4;
+
+  1.  public class reinsertDashes {
+        public String reinsertDashes(String S,int K) {
+            String Str1 = S.replaceAll("-","");
+            StringBuilder Str2 = new StringBuilder(Str1.toUpperCase());
+            if (Str2.length() % K == 0);{
+            int a = Str2.length() / K;
+            for (int i = 1; i < a; i++) {
+                Str2.insert(i * K + i - 1, '-');
+            }
+        }
+        int c = Str2.length() % K;
+        int b = (Str2.length() - c) / K;
+            for (int j = 0; j < b; j++) {
+                Str2.insert(c + 1 + j + j * K, '-');
+            }
+            String licenseKeyFormatted = Str2.toString();
+            return licenseKeyFormatted;
+        }
+
+}
+
+package assignment4;
+
+   2.  public class Tool {
+    protected int strength;
+    protected char type;
+    protected void setStrength(int strength) {
+        this.strength = strength;
+    }
+    Tool(char type) {
+        this.type = type;
+    }
+    }
+
+class Rock extends Tool {
+    public Rock(int r) {
+        super('r');
+        setStrength(r);
+    }
+    protected boolean fight(Tool s) {
+        if (s.type == 'p') {
+            return this.strength > s.strength * 2;
+        } else if (s.type == 's'){
+            return this.strength * 2 > s.strength;
+        }
+        else{
+            return this.strength > s.strength;
+        }
+    }
+}
+
+class Paper extends Tool {
+        public Paper(int t) {
+            super('p');
+            setStrength(t);
+        }
+
+    protected boolean fight(Tool s) {
+        if (s.type == 'r') {
+            return this.strength * 2> s.strength;
+        } else if (s.type == 's'){
+            return this.strength > s.strength * 2;
+        }
+        else{
+            return this.strength > s.strength;
+        }
+    }
+}
+class Scissors extends Tool {
+        public Scissors(int s) {
+            super('s');
+            setStrength(s);
+        }
+        protected boolean fight(Tool s) {
+            if (s.type == 'r') {
+                return this.strength > s.strength * 2;
+            } else if (s.type == 'p'){
+                return this.strength * 2 > s.strength;
+            }
+            else{
+                return this.strength > s.strength;
+            }
+        }
+}
+class RockPaperScissorsGame {
+    public void main(String[] args) {
+        Scissors s = new Scissors(5);
+        Paper p = new Paper(7);
+        Rock r = new Rock(15);
+        System.out.println(s.fight(p) + "," + p.fight(s));
+        System.out.println(p.fight(r) +  "," + r.fight(p));
+        System.out.println(r.fight(s) +  "," + s.fight(r));
+    }
+}
+
+
+package assignment4;
+ 
+  3. public class IpAddress {
+    String dottedDecimal;
+    String getDottedDecimal(){
+        return dottedDecimal;
+    }
+    IpAddress(String s){
+        this.dottedDecimal = s;
+    }
+    int getOctet(int n){
+        String[] Octets = dottedDecimal.split(".");
+        int Octet = Integer.parseInt(Octets[n-1]);
+        return Octet;
+    }
+    public static void main(String args[]){
+        IpAddress ip = new IpAddress("216.27.6.136");
+        System.out.println(ip.getDottedDecimal());
+        System.out.println(ip.getOctet(4));
+        System.out.println(ip.getOctet(1));
+        System.out.println(ip.getOctet(3));
+        System.out.println(ip.getOctet(2));
+    }
+}
+
+package assignment4;
+
+4.
+import java.util.ArrayList;
+import java.util.List;
+
+public class Course {
+    String title;
+    int numberOfStudent = 0;
+    ArrayList<Student> students;
+
+    Course(String title) {
+        this.title = title;
+    }
+    ArrayList<Student> getStudents() {
+        return students;
+    }
+    boolean isFull(){
+        return numberOfStudent >= 10;
+    }
+    void registerStudent(Student student){
+        if(!isFull()){
+            numberOfStudent++;
+            students.add(student);
+        }
+    }
+}
+class Student{
+    String studentName;
+    String studentID;
+
+    public Student(String studentName, String studentID){
+        this.studentName = studentName;
+        this.studentID = studentID;
+
+    }
+
+}
+
+package assignment4;
+
+   5.
+public class romanNumber {
+    public static String convertIntToRoman(int num) {
+        int[] n = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+        String[] str = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX",
+                "V", "IV", "I" };
+        StringBuilder romanNumber = new StringBuilder("");
+        int i = 0;
+        while (num != 0) {
+            if (num >= n[i]) {
+                num -= n[i];
+                romanNumber.append(str[i]);
+            } else
+                i++;
+        }
+        return romanNumber.toString();
+    }
+}
