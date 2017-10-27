@@ -1,0 +1,217 @@
+midterm
+question1:
+package midterm;
+
+public class reverseEvenIndex {
+
+    int[] reverseEvenIndices(int[] nums){
+        int temp;
+        for(int i = 0;i < nums.length/2; i=i+2){
+            if(nums.length%2 == 0){
+                temp = nums[nums.length-i-2];
+                nums[nums.length-i-2] = nums[i];
+                nums[i] = temp;}
+            else{temp = nums[nums.length-i-1];
+                nums[nums.length-i-1] = nums[i];
+                nums[i] = temp;
+            }
+                }
+        return nums;
+    }
+
+}
+class reverseEvenIndicesTest{
+
+
+    public static void main(String[] args) {
+        int[]b = {6,4,1,0,3,2};
+        reverseEvenIndex a = new reverseEvenIndex();
+        a.reverseEvenIndices(b);
+        for(int j = 0 ;j <a.reverseEvenIndices(b).length;j++){
+        System.out.println(a.reverseEvenIndices(b)[j]);}
+    }
+}
+
+
+question2:
+package midterm;
+
+public class coins {
+    int arrangeCoins(int n){
+        int k;
+        for( k = 1;k<n;k++){
+            if(n<=0.5*k*k+1.5*k+1&&n>(k+1)*k/2){
+                return k;
+            }
+        }
+         System.out.println(k);
+        return -1;
+    }
+
+
+    public static void main(String[] args) {
+        coins a = new coins();
+        System.out.println(a.arrangeCoins(Integer.MAX_VALUE));
+    }
+}
+
+
+
+qustion3:
+
+package midterm;
+
+public class minMove {
+    int Moves = 0;
+    public int minMoves(int[] nums) {
+
+        while (!allElementsAreEqual(nums)) {
+            int temp = indexOfMax(nums);
+            for (int i = 0; i < nums.length; i++) {
+                if (i != temp) {
+                    nums[i] = nums[i] + 1;
+                }
+            }
+            Moves++;
+            for(int num:nums) System.out.print(num+",");
+            System.out.println();
+
+        }
+        return Moves;
+    }
+
+    boolean allElementsAreEqual(int[] nums) {
+        //System.out.println(Moves);
+        int temp = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                temp++;
+            }
+        }
+        if (temp == nums.length - 1) {
+            return true;
+        }
+        return false;
+    }
+
+    int indexOfMax(int[] nums) {
+        int location = 0;
+        int max = 0;
+        for (int i = 0; i < nums.length; ++i) {
+            if (nums[i] > max) {
+                max = nums[i];
+                location = i;
+            }
+        }
+       // System.out.println(location);
+        return location;
+    }
+}
+
+class minMoveTest{
+    public static void main(String[] args) {
+        minMove min = new minMove();
+        int[] a = {1, 2, 3, 4};
+        System.out.println(min.minMoves(a));
+    }
+}
+
+
+QUESTION4
+package midterm;
+
+public class dice {
+    int result;
+    public int countNumberOfPossibleWays(int m, int n, int x){
+        int number = 0;
+        int sum = 0;
+        result = 0;
+        countNumberOfPossibleWays(n , m , number, sum, x);
+        return result;
+    }
+    
+    public void countNumberOfPossibleWays(int n, int m, 
+                                          int number,int sum, int x) {
+        if (number == m && sum == x) {
+            result++;
+            return;
+        }
+        
+        if (number == m) {
+            return;
+        }
+        for (int i = 0; i < n; i++) {
+            countNumberOfPossibleWays(n, m , number + 1, sum + i + 1, x);
+        }
+    }
+}
+
+
+
+question5
+
+package midterm;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Cell {
+    int x, y;
+
+    Cell(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public String toString() {
+        return "[" + this.x + ", " + this.y + "]";
+    }
+
+}
+
+class q5{
+    int[][] maze = {
+            {1, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1},
+            {0, 1, 0, 0, 1},
+            {1, 1, 0, 1, 1},
+    };
+    int m = maze.length;
+    int n = maze[0].length;
+    ArrayList<Cell> result = new ArrayList<>();
+
+    boolean findPath(int maze[][], int x, int y){
+
+        if (x == m - 1 && y == n - 1){
+            result.add(new Cell(m-1,n-1));
+            return true;
+        }
+        if (isVaild(maze, x, y) == true){
+            result.add(new Cell(x,y));
+
+            if (findPath(maze, x + 1, y)){
+                return true;
+            }
+            if (findPath(maze, x, y + 1)){
+                return true;
+            }
+            result.remove(result.size()-1);
+
+        }
+        return false;
+    }
+    boolean isVaild(int maze[][], int x, int y){
+        return (x >= 0 && x < m && y >= 0 && y < n && maze[x][y] == 1);
+    }
+
+    public static void main(String[] args) {
+        q5 t = new q5();
+        t.findPath(t.maze,0,0);
+        System.out.println(Arrays.toString(new ArrayList[]{t.result}));
+    }
+}
+
+
+
+
+
